@@ -1,3 +1,3 @@
 # MountainMadness2021
 MountainMadness2021 hackathon project
-Contributors: tvykz, 
+Contributors: tvykz, greedynamic
