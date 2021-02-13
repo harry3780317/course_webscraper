@@ -2,13 +2,15 @@ import requests
 from requests.exceptions import HTTPError, Timeout
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+
 ##from selenium.webdriver.chrome.options import Options
 ## params = year/term/dept/search_param
-
+## params for prof = =%20Angelica%20Lim
 MATCH_LIST = ["fall", "spring", "summer"]
 OUTLINE_BASE_URL = "http://www.sfu.ca/outlines.html?"
+MY_PROF_URL = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName&schoolName=Simon" \
+              "%20Fraser%20University&schoolID=1482&query"
 ##CHROME_PATH = "D:\chromedriver_win32\chromedriver.exe" # need install chrome driver for selenium to work https://chromedriver.chromium.org/downloads
-CHROME_PATH = "/home/muvda/Study/Proj/mountain madness/chromedriver.exe"
 
 ##input("list out courses format: year/<fall|spring|summer> \n or search course format: year/<fall|spring|summer>/search_wildcard")
 def checkInputParams():
@@ -28,6 +30,7 @@ def checkInputParams():
             getResp(query_str)
             break
 
+
 def getResp(query_str):
     try:
         res = requests.get(query_str, timeout=5)
@@ -45,6 +48,7 @@ def getResp(query_str):
         print(f"http error timed out: code: {timeout}")
     except Exception as excep:
         print(f"exception raised: code: {excep}")
+
 
 def scrapeOutline(suffix_val):
     furl = OUTLINE_BASE_URL + suffix_val
@@ -78,4 +82,5 @@ def scrapeOutline(suffix_val):
     print(reqreading.text)
     driver.close()
 
-scrapeOutline("2020/spring/math/100/d200")
+
+scrapeOutline("2021/spring/cmpt/430/d100")
