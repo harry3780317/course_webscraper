@@ -72,7 +72,8 @@ def getResp(query_list):
 
 
 def scrapeOutline(suffix_list):
-    driver = webdriver.Chrome()
+    p = ChromeDriverManager()
+    driver = webdriver.Chrome(executable_path=p.install())
     for suffix_val in suffix_list:
         if suffix_val:
             furl = OUTLINE_BASE_URL + suffix_val
