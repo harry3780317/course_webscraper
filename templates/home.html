@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}SFU Summer 2021 Course Finder{% endblock %}
+
+{% block main %}
+    <div>
+        <form action="your-course" method="post">
+            <label for="course" >Choose your course from the list</label>
+            <input list="courses" name="course" id="course">
+                <datalist id="courses">
+                    <option value="CMPT 120">
+                    <option value="CMPT 231">
+                    <option value="CMPT 300">
+                    <option value="CMPT 354">
+                    <option value="CMPT 407">
+                </datalist>
+            <button type="submit">Find</button>
+        </form>
+    </div>
+{% endblock %}
