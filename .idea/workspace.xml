@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a31d58e-44a5-4dac-8b40-a5ed21977056" name="Default Changelist" comment="added comments about chromedriver installation" />
+    <list default="true" id="5a31d58e-44a5-4dac-8b40-a5ed21977056" name="Default Changelist" comment="added comments about chromedriver installation">
+      <change beforePath="$PROJECT_DIR$/smallscrape.py" beforeDir="false" afterPath="$PROJECT_DIR$/smallscrape.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -135,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613252829450</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added unversioned files">
+      <created>1613252856999</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1613252856999</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
