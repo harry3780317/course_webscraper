@@ -3,17 +3,18 @@ from requests.exceptions import HTTPError, Timeout
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
-##from selenium.webdriver.chrome.options import Options
-## params = year/term/dept/coursenum
-## i.e 2019/spring/cmpt/300
+# from selenium.webdriver.chrome.options import Options
+# params = year/term/dept/coursenum
+# i.e 2019/spring/cmpt/300
 MATCH_LIST = ["fall", "spring", "summer"]
 OUTLINE_BASE_URL = "http://www.sfu.ca/outlines.html?"
-##CHROME_PATH = "D:\chromedriver_win32\chromedriver.exe" # need install chrome driver for selenium to work https://chromedriver.chromium.org/downloads
 
-##input("list out courses format: year/<fall|spring|summer> \n or search course format: year/<fall|spring|summer>/dept/coursenumber")
+
+# CHROME_PATH = "D:\chromedriver_win32\chromedriver.exe" # need install chrome driver for selenium to work https://chromedriver.chromium.org/downloads
+
+# input("list out courses format: year/<fall|spring|summer> \n or search course format: year/<fall|spring|summer>/dept/coursenumber")
 
 def parseInputParams():
-
     while True:
         input_params = input("search for class in format of year/term/dept/coursenum: ")
         if input_params:
@@ -33,10 +34,10 @@ def parseInputParams():
             if not parse_in[3].isnumeric():
                 print("coursenumber should be numeric i.e 300")
                 continue
-            return [parse_in[0], parse_in[1].lower(),parse_in[2],parse_in[3]]
+            return [parse_in[0], parse_in[1].lower(), parse_in[2], parse_in[3]]
+
 
 def getResp(query_list):
-
     query_str = "http://www.sfu.ca/bin/wcm/course-outlines?year={}&term={}&search={}%20{}".format(query_list[0],
                                                                                                   query_list[1],
                                                                                                   query_list[2],
@@ -64,8 +65,8 @@ def getResp(query_list):
         print(f"exception raised: code: {excep}")
     return suffix_list
 
-def scrapeOutline(suffix_list):
 
+def scrapeOutline(suffix_list):
     driver = webdriver.Chrome()
     for suffix_val in suffix_list:
         if suffix_val:
@@ -83,7 +84,8 @@ def scrapeOutline(suffix_list):
                 elif attrib == "prereq":
                     prereq = owelem.text
                     print(prereq)
-            caldescr = driver.find_element_by_xpath("//h4[contains(text(),'CALENDAR DESCRIPTION:')]/following-sibling::p")
+            caldescr = driver.find_element_by_xpath(
+                "//h4[contains(text(),'CALENDAR DESCRIPTION:')]/following-sibling::p")
             print(caldescr.text)
             coursedet = driver.find_element_by_xpath("//h4[contains(text(),'COURSE DETAILS:')]/following-sibling::p")
             print(coursedet.text)
@@ -93,12 +95,15 @@ def scrapeOutline(suffix_list):
                 two = glist.find_element_by_class_name("two")
                 print(one.text)
                 print(two.text)
-            material = driver.find_element_by_xpath("//h4[contains(text(),'MATERIALS + SUPPLIES:')]/following-sibling::p")
+            material = driver.find_element_by_xpath(
+                "//h4[contains(text(),'MATERIALS + SUPPLIES:')]/following-sibling::p")
             print(material.text)
-            reqreading = driver.find_element_by_xpath("//h4[contains(text(),'REQUIRED READING:')]/following-sibling::div")
+            reqreading = driver.find_element_by_xpath(
+                "//h4[contains(text(),'REQUIRED READING:')]/following-sibling::div")
             print(reqreading.text)
     driver.close()
 
+
 out = getResp(parseInputParams())
 print(out)
-#scrapeOutline(out)
+scrapeOutline(out)

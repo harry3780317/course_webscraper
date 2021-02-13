@@ -2,8 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 
 # params for prof = %20Name1%20Name2
+# This url only work with SFU professor, in the future we could extend to other as well using
 MY_PROF_QUERRY_URL = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName&schoolName=Simon" \
-                     "%20Fraser%20University&schoolID=1482&query="
+                     "%20Fraser%20University&query="
 MY_PROF_URL = "https://www.ratemyprofessors.com"
 
 
@@ -52,4 +53,4 @@ def scrape_rating(name):
     print(prof_review)
 
 
-scrape_rating("Liam O'Flaherty")
+scrape_rating("David Mitchell")
