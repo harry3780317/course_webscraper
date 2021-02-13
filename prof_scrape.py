@@ -30,7 +30,7 @@ def scrape_rating(name):
         if len(list) != 0:
             prof_infos.append(list.a['href'])
     if len(prof_infos) != 0:
-        # basic logic: obatain the first link
+        # basic logic: obtain the first link
         prof_rating_url = MY_PROF_URL + prof_infos[0]
         review = session.get(prof_rating_url)
         review_soup = BeautifulSoup(review.content, "html.parser")
@@ -52,4 +52,4 @@ def scrape_rating(name):
     print(prof_review)
 
 
-scrape_rating('Angelica Lim')
+scrape_rating("Liam O'Flaherty")
