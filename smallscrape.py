@@ -5,11 +5,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 ##from selenium.webdriver.chrome.options import Options
 ## params = year/term/dept/search_param
-## params for prof = =%20Angelica%20Lim
 MATCH_LIST = ["fall", "spring", "summer"]
 OUTLINE_BASE_URL = "http://www.sfu.ca/outlines.html?"
-MY_PROF_URL = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName&schoolName=Simon" \
-              "%20Fraser%20University&schoolID=1482&query"
+
+
 ##CHROME_PATH = "D:\chromedriver_win32\chromedriver.exe" # need install chrome driver for selenium to work https://chromedriver.chromium.org/downloads
 
 ##input("list out courses format: year/<fall|spring|summer> \n or search course format: year/<fall|spring|summer>/search_wildcard")
@@ -81,6 +80,5 @@ def scrapeOutline(suffix_val):
     reqreading = driver.find_element_by_xpath("//h4[contains(text(),'REQUIRED READING:')]/following-sibling::div")
     print(reqreading.text)
     driver.close()
-
 
 scrapeOutline("2021/spring/cmpt/430/d100")
