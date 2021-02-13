@@ -1,11 +1,12 @@
 import requests
 from requests.exceptions import HTTPError, Timeout
 from selenium import webdriver
+##from selenium.webdriver.chrome.options import Options
 ## params = year/term/dept/search_param
 
 MATCH_LIST = ["fall", "spring", "summer"]
 OUTLINE_BASE_URL = "http://www.sfu.ca/outlines.html?"
-CHROME_PATH = "D:\chromedriver_win32\chromedriver.exe" # need install chrome driver for selenium to work https://chromedriver.chromium.org/downloads
+##CHROME_PATH = "D:\chromedriver_win32\chromedriver.exe" # need install chrome driver for selenium to work https://chromedriver.chromium.org/downloads
 
 ##input("list out courses format: year/<fall|spring|summer> \n or search course format: year/<fall|spring|summer>/search_wildcard")
 def checkInputParams():
@@ -45,7 +46,7 @@ def getResp(query_str):
 
 def scrapeOutline(suffix_val):
     furl = OUTLINE_BASE_URL + suffix_val
-    driver = webdriver.Chrome(CHROME_PATH)
+    driver = webdriver.Chrome()
     driver.get(furl)
     owelems = driver.find_element_by_class_name("overview-list").find_elements_by_tag_name("li")
     for owelem in owelems:
