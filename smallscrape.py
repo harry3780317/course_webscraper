@@ -6,6 +6,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 # from selenium.webdriver.chrome.options import Options
 # params = year/term/dept/coursenum
 # i.e 2019/spring/cmpt/300
+from selenium.common.exceptions import NoSuchElementException
+
+##from selenium.webdriver.chrome.options import Options
+## params = year/term/dept/coursenum
+## i.e 2019/spring/cmpt/300
 MATCH_LIST = ["fall", "spring", "summer"]
 OUTLINE_BASE_URL = "http://www.sfu.ca/outlines.html?"
 
@@ -72,35 +77,43 @@ def scrapeOutline(suffix_list):
         if suffix_val:
             furl = OUTLINE_BASE_URL + suffix_val
             driver.get(furl)
-            owelems = driver.find_element_by_class_name("overview-list").find_elements_by_tag_name("li")
-            for owelem in owelems:
-                attrib = owelem.get_attribute("class")
-                if attrib == "course-times" or attrib == "exam-times":
-                    p = owelem.text
-                    print(p)
-                elif attrib == "instructor":
-                    instr = owelem.text
-                    print(instr)
-                elif attrib == "prereq":
-                    prereq = owelem.text
-                    print(prereq)
-            caldescr = driver.find_element_by_xpath(
-                "//h4[contains(text(),'CALENDAR DESCRIPTION:')]/following-sibling::p")
-            print(caldescr.text)
-            coursedet = driver.find_element_by_xpath("//h4[contains(text(),'COURSE DETAILS:')]/following-sibling::p")
-            print(coursedet.text)
-            glists = driver.find_element_by_class_name("grading-items").find_elements_by_tag_name("li")
-            for glist in glists:
-                one = glist.find_element_by_class_name("one")
-                two = glist.find_element_by_class_name("two")
-                print(one.text)
-                print(two.text)
-            material = driver.find_element_by_xpath(
-                "//h4[contains(text(),'MATERIALS + SUPPLIES:')]/following-sibling::p")
-            print(material.text)
-            reqreading = driver.find_element_by_xpath(
-                "//h4[contains(text(),'REQUIRED READING:')]/following-sibling::div")
-            print(reqreading.text)
+            try:
+                owelems = driver.find_element_by_class_name("overview-list").find_elements_by_tag_name("li")
+                for owelem in owelems:
+                    attrib = owelem.get_attribute("class")
+                    if attrib == "course-times" or attrib == "exam-times":
+                        p = owelem.text
+                        print(p)
+                    elif attrib == "instructor":
+                        instr = owelem.text
+                        print(instr)
+                    elif attrib == "prereq":
+                        prereq = owelem.text
+                        print(prereq)
+
+                caldescr = driver.find_element_by_xpath("//h4[contains(text(),'CALENDAR DESCRIPTION:')]/following-sibling::p")
+                print(caldescr.text)
+
+                coursedet = driver.find_element_by_xpath("//h4[contains(text(),'COURSE DETAILS:')]/following-sibling::p")
+                print(coursedet.text)
+                grading = driver.find_element_by_class_name("grading")
+                glists = grading.find_element_by_class_name("grading-items").find_elements_by_tag_name("li")
+                for glist in glists:
+                    print("LOLOLOLOLOLOLL")
+                    one = glist.find_element_by_class_name("one")
+                    two = glist.find_element_by_class_name("two")
+                    print(one.text)
+                    print(two.text)
+                notes = grading.find_elements_by_tag_name("p")
+                for note in notes:
+                    print(note.text)
+                material = driver.find_element_by_xpath("//h4[contains(text(),'MATERIALS + SUPPLIES:')]/following-sibling::p")
+                print(material.text)
+                reqreading = driver.find_element_by_xpath("//h4[contains(text(),'REQUIRED READING:')]/following-sibling::div")
+                ##print(reqreading.text)
+            except NoSuchElementException:
+                print("some elements are not found")
+        print("end of query\n\n")
     driver.close()
 
 
