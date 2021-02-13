@@ -5,7 +5,7 @@ from selenium import webdriver
 
 MATCH_LIST = ["fall", "spring", "summer"]
 OUTLINE_BASE_URL = "http://www.sfu.ca/outlines.html?"
-CHROME_PATH = "D:\chromedriver_win32\chromedriver.exe"
+CHROME_PATH = "D:\chromedriver_win32\chromedriver.exe" # need install chrome driver for selenium to work https://chromedriver.chromium.org/downloads
 
 ##input("list out courses format: year/<fall|spring|summer> \n or search course format: year/<fall|spring|summer>/search_wildcard")
 def checkInputParams():
@@ -73,6 +73,6 @@ def scrapeOutline(suffix_val):
     print(material.text)
     reqreading = driver.find_element_by_xpath("//h4[contains(text(),'REQUIRED READING:')]/following-sibling::div")
     print(reqreading.text)
-
+    driver.close()
 
 scrapeOutline("2020/spring/math/100/d200")
