@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 
 # params for prof = %20Name1%20Name2
 # This url only work with SFU professor, in the future we could extend to other as well using
-MY_PROF_QUERRY_URL = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName&schoolName=Simon" \
-                     "%20Fraser%20University&query="
+MY_PROF_QUERRY_URL = "https://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName&schoolName" \
+                     "=Simon%20Fraser%20University&query="
 MY_PROF_URL = "https://www.ratemyprofessors.com"
 
 
@@ -27,9 +27,9 @@ def scrape_rating(name):
     root = session.get(query_url)
     root_soup = BeautifulSoup(root.content, "html.parser")
     prof_infos = []
-    for list in root_soup.findAll('li', attrs={'class': 'listing PROFESSOR'}):
-        if len(list) != 0:
-            prof_infos.append(list.a['href'])
+    for lists in root_soup.findAll('li', attrs={'class': 'listing PROFESSOR'}):
+        if len(lists) != 0:
+            prof_infos.append(lists.a['href'])
     if len(prof_infos) != 0:
         # basic logic: obtain the first link
         prof_rating_url = MY_PROF_URL + prof_infos[0]
@@ -48,10 +48,7 @@ def scrape_rating(name):
         for elem in div_tags.findAll("span", {"class": "Tag-bs9vf4-0 hHOVKF"}):
             feedback_tag.append(elem.text)
         prof_review['tags'] = feedback_tag
-    else:
-        prof_review['error'] = 'The professor does not exist or not available'
     print(prof_review)
     return prof_review
 
-
-#scrape_rating("David Mitchell")
+# scrape_rating("David Mitchell")

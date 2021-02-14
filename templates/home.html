@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
-{% block title %}SFU Summer 2021 Course Finder{% endblock %}
+{% block title %}Course Finder{% endblock %}
 
 {% block main %}
-    <div>
+    <div class="container text-center">
+        <h1 class="jumbotron-heading">Pick your course</h1>
         <form action="your-course" method="post">
-            <label for="course" >Choose your course from the list</label>
+            <label for="course" >Course</label>
             <select name="course" id="course">
-                <optgroup label="Course...">
-                    {% if courses %}
-                        {% for course in courses %}
-                            <option value="{{course['value']}}">{{course['label']}}</option>
-                        {% endfor %}
-                    {% endif %}
-                </optgroup>
+                {% if courses %}
+                    {% for course in courses %}
+                        <option value="{{course['value']}}">{{course['label']}}</option>
+                    {% endfor %}
+                {% endif %}
             </select>
-            <button type="submit">Find</button>
+            <button class="btn btn-primary my-1" type="submit">Find</button>
         </form>
     </div>
 {% endblock %}

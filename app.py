@@ -7,7 +7,6 @@ from prof_scrape import scrape_rating
 from smallscrape import scrapeOutlineForApp
 
 app = Flask(__name__)
-prefix = ('')
 
 
 @app.route('/')
@@ -29,6 +28,11 @@ def your_course():
         return render_template('your_course.html', outline=outline)
     else:
         return redirect(url_for('home'))
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
 
 
 if __name__ == '__main__':

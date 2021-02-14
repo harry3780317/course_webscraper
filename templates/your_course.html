@@ -3,21 +3,24 @@
 
 
 {% block main %}
-    {% if outline %}
-        {% for key, value in outline.items() %}
-            <p id="{{ key }}">{{ value }} </p>
-        {% endfor %}
-    {% endif %}
+    <div class="container">
+        {% if outline %}
+            {% for key, value in outline.items() %}
+                <p class="my-1 font-weight-normal" id="{{ key }}">{{ value }} </p>
+            {% endfor %}
+        {% endif %}
 
-    {% if rating %}
-        {% for key, value in rating.items() %}
-            <p id="{{ key }}">{{ key }}: {{ value }} </p>
-        {% endfor %}
-    {% endif %}
-
-    <p>
-        <a href="{{ url_for('home') }}">
-            <button>Find another course</button>
-        </a>
-    </p>
+        {% if rating %}
+            <h4 class="my-0 font-weight-bold">Professor rating</h4>
+            {% for key, value in rating.items() %}
+                <p class="my-1 font-weight-normal" id="{{ key }}">{{ key }}: {{ value }} </p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="container text-center">
+        <p>
+            <a href="{{ url_for('home') }}">
+                <button class="btn btn-primary my-2">Find another course</button> </a>
+        </p>
+    </div>
 {% endblock %}
