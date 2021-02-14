@@ -5,14 +5,15 @@
     <div>
         <form action="your-course" method="post">
             <label for="course" >Choose your course from the list</label>
-            <input list="courses" name="course" id="course">
-                <datalist id="courses">
-                    <option value="CMPT 120">
-                    <option value="CMPT 231">
-                    <option value="CMPT 300">
-                    <option value="CMPT 354">
-                    <option value="CMPT 407">
-                </datalist>
+            <select name="course" id="course">
+                <optgroup label="Course...">
+                    {% if courses %}
+                        {% for course in courses %}
+                            <option value="{{course['value']}}">{{course['label']}}</option>
+                        {% endfor %}
+                    {% endif %}
+                </optgroup>
+            </select>
             <button type="submit">Find</button>
         </form>
     </div>

@@ -70,9 +70,64 @@ def getResp(query_list):
         print(f"exception raised: code: {excep}")
     return suffix_list
 
+def scrapeOutlineForApp(suffix):
+    p = ChromeDriverManager()
+    outline = {}
+    driver = webdriver.Chrome(executable_path=p.install())
+    furl = OUTLINE_BASE_URL + suffix
+    driver.get(furl)
+    try:
+        owelems = driver.find_element_by_class_name("overview-list").find_elements_by_tag_name("li")
+        for owelem in owelems:
+            attrib = owelem.get_attribute("class")
+            if attrib == "course-times" or attrib == "exam-times":
+                p = owelem.text
+                outline["course-times"] = p
+                print(p)
+            elif attrib == "instructor":
+                instr = owelem.text
+                outline["instructor"] = instr
+                print(instr)
+            elif attrib == "prereq":
+                prereq = owelem.text
+                outline["prereq"] = prereq
+                print(prereq)
+
+        caldescr = driver.find_element_by_xpath(
+            "//h4[contains(text(),'CALENDAR DESCRIPTION:')]/following-sibling::p")
+        print(caldescr.text)
+        outline["calender"] = caldescr.text
+
+        coursedet = driver.find_element_by_xpath(
+            "//h4[contains(text(),'COURSE DETAILS:')]/following-sibling::p")
+        print(coursedet.text)
+        outline["detail"] = coursedet.text
+        grading = driver.find_element_by_class_name("grading")
+        glists = grading.find_element_by_class_name("grading-items").find_elements_by_tag_name("li")
+        for glist in glists:
+            print("LOLOLOLOLOLOLL")
+            one = glist.find_element_by_class_name("one")
+            two = glist.find_element_by_class_name("two")
+            print(one.text)
+            print(two.text)
+        notes = grading.find_elements_by_tag_name("p")
+        for note in notes:
+            print(note.text)
+        material = driver.find_element_by_xpath(
+            "//h4[contains(text(),'MATERIALS + SUPPLIES:')]/following-sibling::p")
+        print(material.text)
+        reqreading = driver.find_element_by_xpath(
+            "//h4[contains(text(),'REQUIRED READING:')]/following-sibling::div")
+        ##print(reqreading.text)
+    except NoSuchElementException:
+        print("some elements are not found")
+    print("end of query\n\n")
+    driver.close()
+    return outline
 
 def scrapeOutline(suffix_list):
     p = ChromeDriverManager()
+    outline = {}
     driver = webdriver.Chrome(executable_path=p.install())
     for suffix_val in suffix_list:
         if suffix_val:
@@ -84,19 +139,26 @@ def scrapeOutline(suffix_list):
                     attrib = owelem.get_attribute("class")
                     if attrib == "course-times" or attrib == "exam-times":
                         p = owelem.text
+                        outline["course-times"] = p
                         print(p)
                     elif attrib == "instructor":
                         instr = owelem.text
+                        outline["instructor"] = instr
                         print(instr)
                     elif attrib == "prereq":
                         prereq = owelem.text
+                        outline["prereq"] = prereq
                         print(prereq)
 
-                caldescr = driver.find_element_by_xpath("//h4[contains(text(),'CALENDAR DESCRIPTION:')]/following-sibling::p")
+                caldescr = driver.find_element_by_xpath(
+                    "//h4[contains(text(),'CALENDAR DESCRIPTION:')]/following-sibling::p")
                 print(caldescr.text)
+                outline["calender"] = caldescr
 
-                coursedet = driver.find_element_by_xpath("//h4[contains(text(),'COURSE DETAILS:')]/following-sibling::p")
+                coursedet = driver.find_element_by_xpath(
+                    "//h4[contains(text(),'COURSE DETAILS:')]/following-sibling::p")
                 print(coursedet.text)
+                outline["detail"] = coursedet
                 grading = driver.find_element_by_class_name("grading")
                 glists = grading.find_element_by_class_name("grading-items").find_elements_by_tag_name("li")
                 for glist in glists:
@@ -108,16 +170,18 @@ def scrapeOutline(suffix_list):
                 notes = grading.find_elements_by_tag_name("p")
                 for note in notes:
                     print(note.text)
-                material = driver.find_element_by_xpath("//h4[contains(text(),'MATERIALS + SUPPLIES:')]/following-sibling::p")
+                material = driver.find_element_by_xpath(
+                    "//h4[contains(text(),'MATERIALS + SUPPLIES:')]/following-sibling::p")
                 print(material.text)
-                reqreading = driver.find_element_by_xpath("//h4[contains(text(),'REQUIRED READING:')]/following-sibling::div")
+                reqreading = driver.find_element_by_xpath(
+                    "//h4[contains(text(),'REQUIRED READING:')]/following-sibling::div")
                 ##print(reqreading.text)
             except NoSuchElementException:
                 print("some elements are not found")
         print("end of query\n\n")
     driver.close()
+    return outline
 
-
-out = getResp(parseInputParams())
-print(out)
-scrapeOutline(out)
+# out = getResp(parseInputParams())
+# print(out)
+# scrapeOutline(out)

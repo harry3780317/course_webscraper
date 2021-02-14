@@ -9,7 +9,7 @@ MY_PROF_URL = "https://www.ratemyprofessors.com"
 
 
 def scrape_rating(name):
-    prof_review = {'name': name}
+    prof_review = {}
 
     name_split = name.split(' ')
     suffix = ''
@@ -51,6 +51,7 @@ def scrape_rating(name):
     else:
         prof_review['error'] = 'The professor does not exist or not available'
     print(prof_review)
+    return prof_review
 
 
-scrape_rating("David Mitchell")
+#scrape_rating("David Mitchell")
