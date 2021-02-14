@@ -4,7 +4,7 @@ import urllib.request
 from flask import Flask, render_template, request, redirect, url_for
 
 from prof_scrape import scrape_rating
-from smallscrape import scrapeOutlineForApp
+from smallscrape import scrape_outline_for_app
 
 app = Flask(__name__)
 
@@ -20,11 +20,13 @@ def home():
 def your_course():
     if request.method == 'POST':
         url_suffix = request.form['course']
-        outline = scrapeOutlineForApp(url_suffix)
-        if 'instructor' in outline:
-            name = generated_name(outline['instructor'])
-            rating = scrape_rating(name)
-            return render_template('your_course.html', outline=outline, rating=rating)
+        outline = scrape_outline_for_app(url_suffix)
+        if 'instructors' in outline:
+            ratings = []
+            for instructor in outline['instructors']:
+                rating = scrape_rating(instructor)
+                ratings.append(rating)
+            return render_template('your_course.html', outline=outline, ratings=ratings)
         return render_template('your_course.html', outline=outline)
     else:
         return redirect(url_for('home'))

@@ -9,7 +9,7 @@ MY_PROF_URL = "https://www.ratemyprofessors.com"
 
 
 def scrape_rating(name):
-    prof_review = {}
+    prof_review = {'name': name}
 
     name_split = name.split(' ')
     suffix = ''
@@ -40,15 +40,20 @@ def scrape_rating(name):
         # other feedback number
         for elem in review_soup.findAll("div", {"class": "FeedbackItem__FeedbackNumber-uof32n-1 kkESWs"}):
             feedback_num.append(elem.text)
-        prof_review['take_again'] = feedback_num[0]
-        prof_review['difficulty'] = feedback_num[1]
+        if len(feedback_num) >= 1:
+            prof_review['take_again'] = feedback_num[0]
+        if len(feedback_num) >= 2:
+            prof_review['difficulty'] = feedback_num[1]
         # look for all tags
         feedback_tag = []
         div_tags = review_soup.find("div", {"class": "TeacherTags__TagsContainer-sc-16vmh1y-0 dbxJaW"})
         for elem in div_tags.findAll("span", {"class": "Tag-bs9vf4-0 hHOVKF"}):
             feedback_tag.append(elem.text)
-        prof_review['tags'] = feedback_tag
-    print(prof_review)
+        if len(feedback_tag) > 1:
+            prof_review['tags'] = feedback_tag
+    else:
+        prof_review['error'] = 'No review available'
+    #print(prof_review)
     return prof_review
 
 # scrape_rating("David Mitchell")

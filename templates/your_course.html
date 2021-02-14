@@ -10,10 +10,12 @@
             {% endfor %}
         {% endif %}
 
-        {% if rating %}
+        {% if ratings %}
             <h4 class="my-0 font-weight-bold">Professor rating</h4>
-            {% for key, value in rating.items() %}
-                <p class="my-1 font-weight-normal" id="{{ key }}">{{ key }}: {{ value }} </p>
+            {% for rating in ratings %}
+                {% for key, value in rating.items() %}
+                    <p class="my-1 font-weight-normal" id="{{ key }}">{{ key }}: {{ value }} </p>
+                {% endfor %}
             {% endfor %}
         {% endif %}
     </div>
