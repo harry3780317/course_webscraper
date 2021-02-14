@@ -39,11 +39,3 @@ def page_not_found(error):
 
 if __name__ == '__main__':
     app.run()
-
-
-def generated_name(name):
-    final_name = ''
-    for word in name.split('\n'):
-        if word[0].isupper() and word != 'INSTRUCTOR:':
-            final_name += word + ' '
-    return final_name

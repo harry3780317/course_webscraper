@@ -69,6 +69,7 @@ def getResp(query_list):
     return suffix_list
 
 
+# A version of scrapeOutline using BeautifulSoup, worse as it scrapes less info but required less dependencies
 def scrape_outline_for_app(suffix):
     outline = {}
     headers = {
@@ -106,7 +107,7 @@ def scrape_outline_for_app(suffix):
             outline['prerequisite'] = preq
     except NoSuchElementException:
         print("some elements are not found")
-    #print(outline)
+    # print(outline)
     return outline
 
 
@@ -166,8 +167,7 @@ def scrapeOutline(suffix_list):
         print("end of query\n\n")
     driver.close()
 
-
-#scrape_outline_for_app('2021/spring/cmpt/125/d100')
+# scrape_outline_for_app('2021/spring/cmpt/125/d100')
 # out = getResp(parseInputParams())
 # print(out)
 # scrapeOutline(out)
