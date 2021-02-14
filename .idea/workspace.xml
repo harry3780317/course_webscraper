@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5a31d58e-44a5-4dac-8b40-a5ed21977056" name="Default Changelist" comment="added comments about chromedriver installation">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mountain madness.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mountain madness.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-02-13_1_41_p_m___Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-02-13_1_41_p_m___Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smallscrape.py" beforeDir="false" afterPath="$PROJECT_DIR$/smallscrape.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +76,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.app" />
+      <item itemvalue="Python.smallscrape" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.smallscrape" />
@@ -208,6 +213,7 @@
     <MESSAGE value="added comments about chromedriver installation" />
     <MESSAGE value="made some changes on user input and request method" />
     <MESSAGE value="added unversioned files" />
-    <option name="LAST_COMMIT_MESSAGE" value="added unversioned files" />
+    <MESSAGE value="return scraped outline in json format" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
