@@ -11,8 +11,9 @@ run smallscrape.py and input in the format ---> year/term/dept/coursenum (i.e 20
 
 output:
 
-
-[
+```yaml
+{
+   [
     {
         "course-times": [
             "COURSE TIMES + LOCATION:\nMo, We, Fr 1:30 PM \u2013 2:20 PM\nSSCB 9201, Burnaby"
@@ -109,5 +110,4 @@ output:
         "requiredreading": "Operating System Concepts , 9th Edition\nAbraham Silberschatz, Peter Baer Galvin, Greg Gagne\nJ. Wiley & Sons\n2012\nISBN: 9781118063330"
     }
 ]
-
-Process finished with exit code 0
+}
